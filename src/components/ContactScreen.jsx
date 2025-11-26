@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { ContactCard } from './ContactCard'
 import { useDispatch, useSelector } from 'react-redux'
 import { startLoadingContact } from '../action/contact'
+import { NavBar } from './NavBar'
 
 
 export const ContactScreen = () => {
@@ -18,8 +19,15 @@ export const ContactScreen = () => {
   }, [dispatch])
 
   return (
+<div className='con__screen'>
 
-    <div className="cards-container"> {/* Contenedor flex */}
+
+    <NavBar/>
+
+
+    
+
+    <div className="con-cards-container">
       {contact.map((c) => (
         <ContactCard
           {...c}
@@ -27,6 +35,8 @@ export const ContactScreen = () => {
         />
       ))}
     </div>
+
+</div>
 
 
 

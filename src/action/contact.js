@@ -13,7 +13,7 @@ export const startLoadingContact = () =>{
             const resp = await fetchContact('contact',{},'GET')
             const body = await resp.json()
             const {contacts} = body
-            
+            localStorage.setItem('contact',contacts)
             dispatch(contactLoaded(contacts))
 
         } catch (error) {
@@ -28,4 +28,28 @@ export const startLoadingContact = () =>{
 const contactLoaded = (contact) =>({
     type: types.contactGet,
     payload : contact
+})
+
+
+export const startSearch = (val) =>{
+    return (dispatch, getState)=>{
+        const value = val.trim().toLowerCase()
+        const {contact} = getState().cont
+        const cont = contact.filter(c=>
+        c.name.trim().toLowerCase().includes(value) ||
+        c.user.trim().toLowerCase().includes(value) ||
+        c.center.trim().toLowerCase().includes(value) ||
+        c.firstNum.trim().toLowerCase().includes(value) ||
+        c.secondNum.trim().toLowerCase().includes(value) ||
+        c.position.trim().toLowerCase().includes(value) )
+        dispatch(Search(cont))
+    }
+
+
+}
+
+const Search = (c) =>({
+    
+    type : types.contactSearch,
+    payload: c
 })
