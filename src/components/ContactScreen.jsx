@@ -8,7 +8,7 @@ import { NavBar } from './NavBar'
 export const ContactScreen = () => {
 
 
-  const { contact } = useSelector(state => state.cont)
+  const { contact, scontact, search } = useSelector(state => state.cont)
 
   const dispatch = useDispatch()
   useEffect(() => {
@@ -19,24 +19,35 @@ export const ContactScreen = () => {
   }, [dispatch])
 
   return (
-<div className='con__screen'>
+    <div className='con__screen'>
 
 
-    <NavBar/>
+      <NavBar />
+
+      {
+        (search)
+          ? (<div className="con-cards-container">
+            {scontact.map((c) => (
+              <ContactCard
+                {...c}
+                key={c.id}
+              />
+            ))}
+          </div>)
+          : (<div className="con-cards-container">
+            {contact.map((c) => (
+              <ContactCard
+                {...c}
+                key={c.id}
+              />
+            ))}
+          </div>)
+      }
 
 
-    
 
-    <div className="con-cards-container">
-      {contact.map((c) => (
-        <ContactCard
-          {...c}
-          key={c.id}
-        />
-      ))}
+
     </div>
-
-</div>
 
 
 

@@ -2,6 +2,7 @@ import { types } from "../type/types";
 
 const initialState = {
     contact : [],
+    scontact: [],
     active: null,
     search: false
 }
@@ -14,13 +15,15 @@ export const contactReducer = (state = initialState, action) =>{
             return {
                 ...state,
                 contact: [...action.payload],
-                active: null
+                scontact:[],
+                active: null,
+                search: false,
             }
 
         case types.contactSearch:
             return {
                 ...state,
-                contact: [...action.payload],
+                scontact :[...action.payload] ,
                 active: null,
                 search: true
             }

@@ -13,8 +13,9 @@ const dispatch = useDispatch();
         setSearch(e.target.value)
         if (e.target.value.trim()==='') {
             dispatch(startLoadingContact())
+
         }
-        dispatch(startSearch(search))
+        dispatch(startSearch(search))   
     }
 
     const handleSubmit = (e) =>{
@@ -43,6 +44,7 @@ const dispatch = useDispatch();
                             onChange={handleSearch}
                             name='search'
                             value={search}
+                            autoComplete='off'
                         />
                     </form>
                 </div>

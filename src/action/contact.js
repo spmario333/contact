@@ -13,7 +13,7 @@ export const startLoadingContact = () =>{
             const resp = await fetchContact('contact',{},'GET')
             const body = await resp.json()
             const {contacts} = body
-            localStorage.setItem('contact',contacts)
+            
             dispatch(contactLoaded(contacts))
 
         } catch (error) {
@@ -40,7 +40,7 @@ export const startSearch = (val) =>{
         c.user.trim().toLowerCase().includes(value) ||
         c.center.trim().toLowerCase().includes(value) ||
         c.firstNum.trim().toLowerCase().includes(value) ||
-        c.secondNum.trim().toLowerCase().includes(value) ||
+        c.center.trim().toLowerCase().includes(value) ||
         c.position.trim().toLowerCase().includes(value) )
         dispatch(Search(cont))
     }
