@@ -53,3 +53,44 @@ const Search = (c) =>({
     type : types.contactSearch,
     payload: c
 })
+
+export const updateActive = (contact) =>({
+    type: types.contactActive,
+    payload: contact
+})
+
+
+
+export const startUpdate = (contacto) =>{
+    return async(dispatch, getState)=>{
+
+        const {id} = getState().cont.active
+
+
+        try {
+            const resp = await fetchContact(`contact/${id}`,contacto,'PUT')
+            
+            dispatch(updateContact())
+            dispatch(startLoadingContact())
+
+            
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}
+
+const updateContact = () =>({
+    type: types.contactUpdate,
+    
+})
+
+export const modalOpen = () =>({
+    type: types.contactOpenModal,
+    
+})
+
+
+export const modalClose = () =>({
+    type: types.contactCloseModal
+})

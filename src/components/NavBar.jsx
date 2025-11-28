@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { startLoadingContact, startSearch } from '../action/contact';
+import { ButtonAuth } from './ButtonAuth';
 
 export const NavBar = () => {
 
 
-const [search, setSearch] = useState('mario')
+const [search, setSearch] = useState('')
 const dispatch = useDispatch();
 
 
@@ -26,14 +27,16 @@ const dispatch = useDispatch();
     return (
         <div>
             <nav className="navbar navbar-light bg-light justify-content-between ">
-                <a className="navbar-brand">NavBar</a>
+                <a className="navbar-brand">
+                    {<ButtonAuth/>}
+                </a>
                 
                 
                 <div className="d-flex align-items-center">
                     
                     
                     <form className="form-inline ml-3 d-flex" onSubmit={handleSubmit}>
-                        <button className="btn btn-outline-primary mr-2" type="submit">
+                        <button className="btn btn-outline-primary mr-2 btn__search" type="submit">
                             Buscar
                         </button>
                         <input 
