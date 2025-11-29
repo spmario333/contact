@@ -1,35 +1,36 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { LogOut, startLogin } from '../action/auth'
+import { Modal } from 'react-bootstrap'
 
 export const ButtonAuth = () => {
 
 
-  const dispatch = useDispatch()  
+  const dispatch = useDispatch()
   const [checked, setChecked] = useState(false)
   const [pass, setPass] = useState('')
-  const {ok} = useSelector(state=>state.auth)
+  const { ok } = useSelector(state => state.auth)
 
   const handleLogin = (e) => {
-      setChecked(e.target.checked)
-      if (ok) {
-        dispatch(LogOut())
-      }
-    
-      
+    setChecked(e.target.checked)
+    if (ok) {
+      dispatch(LogOut())
+    }
+
+
   }
 
   const handlePass = (e) => {
     setPass(e.target.value)
-    
+
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
     dispatch(startLogin(pass))
-    
-   
-    
+
+
+
   }
 
 
@@ -39,14 +40,22 @@ export const ButtonAuth = () => {
 
 
         (checked && !ok)
-        && (<form onSubmit={handleSubmit}>
-          <label >Admin</label>
-          <input
-            type="password"
-            onChange={handlePass}
-          />
+        && (
+          <Modal show={checked} backdrop={false}>
+            <Modal.Body>
 
-        </form>)
+              <form onSubmit={handleSubmit}>
+                <label >Admin</label>
+                <input
+                  type="password"
+                  onChange={handlePass}
+                />
+
+              </form>
+            </Modal.Body>
+
+          </Modal>
+        )
 
 
       }
@@ -57,7 +66,7 @@ export const ButtonAuth = () => {
         className="checkbox-wrapper"
         onClick={handleLogin}
       >
-        <input type="checkbox"  />
+        <input type="checkbox" />
         <div className="checkmark">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
             <path

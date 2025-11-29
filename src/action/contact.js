@@ -64,11 +64,12 @@ export const updateActive = (contact) =>({
 export const startUpdate = (contacto) =>{
     return async(dispatch, getState)=>{
 
-        const {id} = getState().cont.active
+        
+        const {id} = contacto
 
 
         try {
-            const resp = await fetchContact(`contact/${id}`,contacto,'PUT')
+            await fetchContact(`contact/${id}`,contacto,'PUT')
             
             dispatch(updateContact())
             dispatch(startLoadingContact())
@@ -93,4 +94,58 @@ export const modalOpen = () =>({
 
 export const modalClose = () =>({
     type: types.contactCloseModal
+})
+
+
+export const startNewContact = (contact) =>{
+    return async (dispatch)=>{
+        try {
+            
+            await fetchContact(`contact/new`,contact,'POST')
+            dispatch(startLoadingContact())
+            dispatch(newContact())
+
+
+        } catch (error) {
+            console.log(error)
+        }
+
+
+
+
+    }
+
+
+}
+
+
+const newContact = () =>({
+    type: types.contactAdd,
+
+})
+
+
+
+export const startDeleteContact = (id) =>{
+
+    return async(dispatch)=>{
+
+        
+
+
+        try {
+            await fetchContact(`contact/${id}`,{},'DELETE')
+            
+            dispatch(deleteContact())
+            dispatch(startLoadingContact())
+
+            
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}
+
+const deleteContact = () =>({
+    type: types.contactDelete
 })

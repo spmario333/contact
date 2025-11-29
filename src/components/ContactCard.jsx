@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux"
-import { modalOpen, startUpdate, updateActive } from "../action/contact"
+import { modalOpen, startDeleteContact, startUpdate, updateActive } from "../action/contact"
 import { ModalForm } from "./ModalForm"
 import { Button } from 'react-bootstrap'
 
@@ -16,7 +16,10 @@ export const ContactCard = (props) => {
     dispatch(updateActive(props))
     dispatch(modalOpen())
   }
-
+  const handleDeleted = () => {
+    dispatch(startDeleteContact(props.id))
+    
+  }
 
   return (
 
@@ -30,7 +33,7 @@ export const ContactCard = (props) => {
 
       {
         (ok) &&
-        (<div>
+        (<div className="card-contact-buttons">
           <Button
             className="btn btn-primary mr-2 "
             onClick={handleEdit}
@@ -39,7 +42,7 @@ export const ContactCard = (props) => {
           >
             Editar
           </Button>
-          <button className="btn btn-danger mr-2 " >
+          <button className="btn btn-danger mr-2 " onClick={handleDeleted}>
             Eliminar
           </button>
         </div>)
@@ -47,7 +50,7 @@ export const ContactCard = (props) => {
       }
 
 
-      <ModalForm/>
+      <ModalForm />
     </div>
 
   )

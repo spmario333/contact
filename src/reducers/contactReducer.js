@@ -48,8 +48,21 @@ export const contactReducer = (state = initialState, action) => {
         case types.contactCloseModal:
             return{
                 ...state,
-                modal: false
+                modal: false,
+                active: null,
             }
+        case types.contactAdd:
+            return {
+                ...state,
+                modal:false,
+
+            }
+        case types.contactDelete:
+            return {
+                ...state,
+                active:null,
+
+            }    
 
         default:
             return state;
