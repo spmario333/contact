@@ -1,16 +1,22 @@
 import Swal from "sweetalert2";
 
+const getBaseURL = () =>{
+    if(typeof window !== 'undefined'){
+        return window.location.origin
+    }
 
+    return process.env.REACT_APP_API_URL || 'http://localhost:4005' 
+     
+}
 
-const baseURL = process.env.REACT_APP_API_URL
 
 
 
 export const fetchContact = (endpoint, data, method = 'GET') => {
 
 
-
-    const url = `${baseURL}/${endpoint}`
+    const baseURL =getBaseURL()
+    const url = `${baseURL}/api/${endpoint}`
 
     try {
 
