@@ -351,3 +351,134 @@ body {
   align-items: center;
   gap: 10px;
 }
+
+/* /////Recomendacion IA////// */
+
+.con-card p {
+  word-wrap: break-word;
+  max-width: 100%;
+}
+
+/* Loading indicator */
+.loading-spinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 2s linear infinite;
+  margin: 20px auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Estilos ESPECÍFICOS solo para el modal de login */
+.login-modal-backdrop {
+  background-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+.login-modal-body {
+  padding: 0 !important;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.login-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.login-header h5 {
+  margin: 0;
+  font-weight: 600;
+  font-size: 1.3rem;
+}
+
+.login-form {
+  padding: 25px;
+  background: #f8f9fa;
+}
+
+.login-form .form-group {
+  margin-bottom: 20px;
+}
+
+.login-form label {
+  font-weight: 600;
+  color: #495057;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.login-input {
+  border: 2px solid #e9ecef;
+  border-radius: 8px;
+  padding: 12px 15px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  background: white;
+}
+
+.login-input:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+  outline: none;
+}
+
+.login-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 25px;
+}
+
+.login-btn {
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  min-width: 100px;
+}
+
+.login-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-primary.login-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+}
+
+.btn-primary.login-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.btn-secondary.login-btn {
+  background: #6c757d;
+  border: none;
+}
+
+.btn-secondary.login-btn:hover {
+  background: #5a6268;
+  transform: translateY(-1px);
+}
+
+/* Asegurar que el modal se vea bien en móviles */
+@media (max-width: 576px) {
+  .login-buttons {
+    flex-direction: column;
+  }
+  
+  .login-btn {
+    min-width: auto;
+    width: 100%;
+  }
+}

@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux"
-import { modalOpen, startDeleteContact, startUpdate, updateActive } from "../action/contact"
+import { modalOpen, startDeleteContact, updateActive } from "../action/contact"
 import { ModalForm } from "./ModalForm"
 import { Button } from 'react-bootstrap'
 
@@ -15,6 +15,7 @@ export const ContactCard = (props) => {
   const handleEdit = () => {
     dispatch(updateActive(props))
     dispatch(modalOpen())
+    
   }
   const handleDeleted = () => {
     dispatch(startDeleteContact(props.id))
@@ -24,12 +25,12 @@ export const ContactCard = (props) => {
   return (
 
     <div className="con-card">
-      <p className="con-heading">Nombre : {props.name}</p>
-      <p>Movil : {props.firstNum}</p>
-      <p>Fijo : {props.secondNum}</p>
-      <p>Cargo : {props.position}</p>
-      <p>Centro : {props.center}</p>
-      <p>Usuario : {props.user}</p>
+      <p className="con-heading">Nombre : {(props.name)?(props.name):''}</p>
+      <p>Móvil : {(props.firstNum)?(props.firstNum):''}</p>
+      <p>Fijo : {(props.secondNum)?(props.secondNum):''}</p>
+      <p>Cargo : {(props.position)?(props.position):''}</p>
+      <p>Centro : {(props.center)?(props.center):''}</p>
+      <p>Usuario : {(props.user)?(props.user):''}</p>
 
       {
         (ok) &&

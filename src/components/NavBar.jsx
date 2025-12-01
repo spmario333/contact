@@ -1,11 +1,10 @@
-import React, { useState } from 'react'
+import React, {  useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { modalOpen, startLoadingContact, startSearch } from '../action/contact';
 import { ButtonAuth } from './ButtonAuth';
 import { Button } from 'react-bootstrap';
 
 export const NavBar = () => {
-
 
     const [search, setSearch] = useState('')
     const dispatch = useDispatch();
@@ -29,6 +28,7 @@ export const NavBar = () => {
 
     const handleNewContact = () =>{
         dispatch(modalOpen())
+
     }
 
     return (

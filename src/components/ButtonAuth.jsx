@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { LogOut, startLogin } from '../action/auth'
 import { Modal } from 'react-bootstrap'
@@ -10,15 +10,24 @@ export const ButtonAuth = () => {
   const [checked, setChecked] = useState(false)
   const [pass, setPass] = useState('')
   const { ok } = useSelector(state => state.auth)
+  const inputRef = useRef(null)
+
+  useEffect(() => {
+    if (checked && !ok && inputRef.current) {
+      inputRef.current.focus()
+    }
+  }, [checked, ok])
+
 
   const handleLogin = (e) => {
-    setChecked(e.target.checked)
-    if (ok) {
+
+    const isChecked = e.target.checked
+    setChecked(isChecked)
+    if (ok && !isChecked) {
       dispatch(LogOut())
     }
-
-
   }
+
 
   const handlePass = (e) => {
     setPass(e.target.value)
@@ -27,10 +36,18 @@ export const ButtonAuth = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    dispatch(startLogin(pass))
+    if (pass.trim()) {
+      dispatch(startLogin(pass))
+      setPass('')
+    }
 
 
 
+  }
+
+  const handleClose = () => {
+    setChecked(false)
+    setPass('')
   }
 
 
@@ -41,15 +58,46 @@ export const ButtonAuth = () => {
 
         (checked && !ok)
         && (
-          <Modal show={checked} backdrop={false}>
-            <Modal.Body>
+          <Modal
+            show={checked && !ok}
+            onHide={handleClose}
+            backdrop={true}
+            keyboard={true}
+          >
+            <Modal.Body className='login-modal-body'>
+              <div className='login-header'>
+                <h5>Acceso Admin</h5>
+              </div>
+              <form onSubmit={handleSubmit} className='login-form'>
+                <div className='form-group'>
 
-              <form onSubmit={handleSubmit}>
-                <label >Admin</label>
-                <input
-                  type="password"
-                  onChange={handlePass}
-                />
+                  <label >Contraseña Admin</label>
+                  <input
+                    ref={inputRef}
+                    type="password"
+                    onChange={handlePass}
+                    value={pass}
+                    placeholder='Contraseña'
+                    className='form-control login-input'
+                    autoComplete='current-password'
+                  />
+                </div>
+                <div className="login-buttons">
+                  <button
+                    type="submit"
+                    className="btn btn-primary login-btn"
+                    disabled={!pass.trim()}
+                  >
+                    Ingresar
+                  </button>
+                  <button
+                    type="button"
+                    className="btn btn-secondary login-btn"
+                    onClick={handleClose}
+                  >
+                    Cancelar
+                  </button>
+                </div>
 
               </form>
             </Modal.Body>
@@ -64,9 +112,12 @@ export const ButtonAuth = () => {
 
       <label
         className="checkbox-wrapper"
-        onClick={handleLogin}
+       
       >
-        <input type="checkbox" />
+        <input type="checkbox"
+          checked={ok || checked}
+          onChange={handleLogin}
+        />
         <div className="checkmark">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
             <path
