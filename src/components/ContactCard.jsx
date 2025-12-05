@@ -30,7 +30,17 @@ export const ContactCard = (props) => {
       <p>Fijo : {(props.secondNum)?(props.secondNum):''}</p>
       <p>Cargo : {(props.position)?(props.position):''}</p>
       <p>Centro : {(props.center)?(props.center):''}</p>
-      <p>Usuario : {(props.user)?(props.user):''}</p>
+      <p>Usuario : {
+  (props.user) ? (
+    <a 
+      href={`mailto:${props.user}@etecsa.cu`}
+      className="text-blue-600 hover:text-blue-800 hover:underline transition-colors duration-200"
+      title="Enviar correo a este usuario"
+    >
+      {props.user}
+    </a>
+  ) : ''
+}</p>
 
       {
         (ok) &&

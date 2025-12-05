@@ -32,13 +32,17 @@ export const ModalForm = () => {
         if (active) {
             setForm(active)
         } else {
-            setForm(initialFormState)
+            setForm({
+        name: '',
+        firstNum: '',
+        secondNum: '',
+        position: '',
+        center: '',
+        user: '',
+    })
         }
-       if(modal && ok){
-        namefocus.current.focus()
-       }
-
-    }, [active, modal, initialFormState, ok])
+      
+    }, [active])
 
     const { name, firstNum, secondNum, position, center, user } = form
 
